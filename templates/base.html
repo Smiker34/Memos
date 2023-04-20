@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block style %}{% endblock %}
+    {% block script %}{% endblock %}
+</head>
+
+<body style="margin: 0; display: flex; flex-direction: column;">
+    {% block header %} {% endblock %}
+    {% block body %} {% endblock %}
+    {% block footer %} {% endblock %}
+</body>
+
+</html>

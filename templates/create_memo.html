@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+Course category create
+{% endblock %}
+{% block style %}
+{% include "style.html" %}
+{% endblock %}
+{% block header %}
+{% include "header.html" %}
+{% endblock %}
+{% block body %}
+<div class="content">
+    <div class="board">
+        <div class="create_container">
+            <h1>Создание заметки</h1>
+            <form method="post">
+                <input class="title_input" maxlength="32" type="text" name="title" placeholder="Название">
+                <textarea maxlength="275" class="text_input" type="text" name="text" placeholder="Текст"></textarea>
+                <p>
+                    <label>Выберите цвет:</label>
+                    <input class="color_input" type="color" name="color">
+                </p>
+                <p style="color: red; text-shadow: black 1px 0 10px;">{{error}}</p>
+                <button type="submit">Сохранить и вернуться на главную</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

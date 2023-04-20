@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+Course category create
+{% endblock %}
+{% block style %}
+{% include "style.html" %}
+{% endblock %}
+{% block header %}
+{% include "header.html" %}
+{% endblock %}
+{% block body %}
+<div class="content">
+    <div class="board">
+        <div class="create_container">
+            <h1>Редактирование заметки</h1>
+            <form method="post">
+                <button class="delete" name="delete" value="delete">X</button>
+                <input class="title_input" maxlength="32" type="text" name="title" value="{{name}}">
+                <textarea class="text_input" maxlength="275" type="text" name="text">{{text}}</textarea>
+                <p>
+                    <label>Выберите цвет:</label>
+                    <input class="color_input" type="color" name="color" value="{{color}}">
+                </p>
+                <h5>{{memo_date}}</h5>
+                <button type="submit">Сохранить и вернуться на главную</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
