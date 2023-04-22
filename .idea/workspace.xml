@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="27138240-c399-428f-8514-a16795559e8b" name="Changes" comment="" />
+    <list default="true" id="27138240-c399-428f-8514-a16795559e8b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patterns.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/patterns.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patterns/сreational_patterns.py" beforeDir="false" afterPath="$PROJECT_DIR$/patterns/сreational_patterns.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index_body.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index_body.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/style.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2NzgJRTkGGXmUmxJyvqBQzMTwgV" />
   <component name="ProjectViewState">

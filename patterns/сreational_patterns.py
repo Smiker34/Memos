@@ -14,6 +14,7 @@ class Memo:
             self.color = color
         else:
             self.color = f'style="background-color: {color};"'
+        self.text_color = f'style="color: {color}; filter: invert(100%);"'
         self.create_date = create_date
 
 
@@ -106,6 +107,7 @@ class Engine:
                     item.text = text
                 if color:
                     item.color = f'style="background-color: {color};"'
+                    item.text_color = f'style="color: {color}; filter: invert(100%);"'
             mapper.update(item)
 
     def delete_memo(self, id):

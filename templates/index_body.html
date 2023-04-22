@@ -3,9 +3,9 @@
         <div class="memos">
             {% for item in objects_list %}
             <div class="memo" {{item.color}}>
-                <h2><a href="/memo_page/?id={{item.id}}">{{item.title}}</a></h2>
-                <h4>{{item.text}}</h4>
-                <h5>{{item.create_date}}</h5>
+                <h2><a {{item.text_color}} href="/memo_page/?id={{item.id}}">{{item.title}}</a></h2>
+                <h4 {{item.text_color}}>{{item.text}}</h4>
+                <h5 {{item.text_color}}>{{item.create_date}}</h5>
             </div>
             {% endfor %}
         </div>
