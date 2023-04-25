@@ -5,6 +5,9 @@ Course category create
 {% block style %}
 {% include "style.html" %}
 {% endblock %}
+{% block script %}
+{% include "script.html" %}
+{% endblock %}
 {% block header %}
 {% include "header.html" %}
 {% endblock %}
@@ -16,9 +19,15 @@ Course category create
             <form method="post">
                 <input class="title_input" maxlength="32" type="text" name="title" placeholder="Название">
                 <textarea maxlength="275" class="text_input" type="text" name="text" placeholder="Текст"></textarea>
+                <!-- Основа для списка
+                <p>
+                <ul>
+                </ul>
+                <button type="button" onclick="new_li()">Добавить</button>
+                </p> -->
                 <p>
                     <label>Выберите цвет:</label>
-                    <input class="color_input" type="color" name="color">
+                    <input class="color_input" type="color" name="color" value="#ffffff">
                 </p>
                 <p style="color: red; text-shadow: black 1px 0 10px;">{{error}}</p>
                 <button type="submit">Сохранить и вернуться на главную</button>

@@ -1,3 +1,4 @@
+import re
 from quopri import decodestring
 from sqlite3 import connect
 
@@ -10,10 +11,7 @@ class Memo:
         Memo.auto_id += 1
         self.title = title
         self.text = text
-        if len(color) > 7:
-            self.color = color
-        else:
-            self.color = f'style="background-color: {color};"'
+        self.color = f'style="background-color: {color};"'
         self.text_color = f'style="color: {color}; filter: invert(100%);"'
         self.create_date = create_date
 
@@ -31,7 +29,7 @@ class MemoMapper:
         result = []
         for item in self.cursor.fetchall():
             id, title, text, color, create_date = item
-            memo = Memo(title, text, color, create_date)
+            memo = Memo(title, text, re.search(r'#\w{6}', color)[0], create_date)
             memo.id = id
             result.append(memo)
         return result

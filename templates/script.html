@@ -1,2 +1,12 @@
 <script>
+    var num = 0
+    function new_li() {
+        var ul = document.querySelector("ul");
+        var li = document.createElement("li");
+        var input = document.createElement("input");
+        input.setAttribute("name", "point" + num);
+        li.appendChild(input);
+        ul.appendChild(li);
+        num++
+    }
 </script>
