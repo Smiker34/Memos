@@ -1,12 +1,18 @@
 <script>
-    var num = 0
+    var num = 1
     function new_li() {
-        var ul = document.querySelector("ul");
-        var li = document.createElement("li");
-        var input = document.createElement("input");
-        input.setAttribute("name", "point" + num);
-        li.appendChild(input);
-        ul.appendChild(li);
-        num++
+        if (num == 11) {
+            alert("Слишком много пунктов")
+        } else {
+            var ul = document.querySelector("ul");
+            var li = document.createElement("li");
+            var input = document.createElement("input");
+            input.setAttribute("name", "point" + num);
+            input.setAttribute("placeholder", "Новый пункт")
+            input.setAttribute("maxlength", "37")
+            li.appendChild(input);
+            ul.appendChild(li);
+            num++
+        }
     }
 </script>

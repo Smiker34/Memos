@@ -13,7 +13,7 @@ routes = {}
 class Memos:
     @Debug(name='Index')
     def __call__(self, request):
-        return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+        return '200 OK', render('index.html', img='home.svg', date=request.get('date', None), objects_list=site.memos)
 
 class NotFound404:
     @Debug(name='NotFound404')
@@ -30,17 +30,37 @@ class CreateMemo:
             data = request['data']
             title, text, color = data['title'], data['text'], data['color']
             title = site.decode_value(title)
-            text = site.decode_value(text)
             color = site.decode_value(color)
 
             if not title:
                 return '200 OK', render('create_memo.html', error='Введите название!', date=request.get('date', None))
 
-            new_memo = site.create_memo(title, text, color, create_date=request.get('date', None))
+            new_memo = site.create_memo(title, color, create_date=request.get('date', None), text=site.decode_value(text))
             site.memos.append(new_memo)
             return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
         else:
             return '200 OK', render('create_memo.html', date=request.get('date', None))
+
+
+@AppRoute(routes=routes, url='/create_list_memo/')
+class CreateListMemo:
+    @Debug(name='Create_List_Memo')
+    def __call__(self, request):
+
+        if request['method'] == 'POST':
+            data = request['data']
+            title, color = data.pop('title'), data.pop('color')
+            title = site.decode_value(title)
+            color = site.decode_value(color)
+
+            if not title:
+                return '200 OK', render('create_list_memo.html', error='Введите название!', date=request.get('date', None))
+
+            new_memo = site.create_memo(title, color, create_date=request.get('date', None), list=list(data.values()))
+            site.memos.append(new_memo)
+            return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+        else:
+            return '200 OK', render('create_list_memo.html', date=request.get('date', None))
 
 
 @AppRoute(routes=routes, url='/memo_page/')

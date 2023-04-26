@@ -15,10 +15,17 @@ Course category create
 <div class="content">
     <div class="board">
         <div class="create_container">
-            <h1>Создание заметки</h1>
+            <h1>Создание списка</h1>
             <form method="post">
                 <input class="title_input" maxlength="32" type="text" name="title" placeholder="Название">
-                <textarea maxlength="275" class="text_input" type="text" name="text" placeholder="Текст"></textarea>
+                <p>
+                <ul>
+                    <li>
+                        <input maxlength="37" placeholder="Новый пункт" name="li0">
+                    </li>
+                </ul>
+                <button type="button" onclick="new_li()">Добавить</button>
+                </p>
                 <p>
                     <label>Выберите цвет:</label>
                     <input class="color_input" type="color" name="color" value="#ffffff">

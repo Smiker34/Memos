@@ -3,11 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="27138240-c399-428f-8514-a16795559e8b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patterns.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/patterns.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patterns/сreational_patterns.py" beforeDir="false" afterPath="$PROJECT_DIR$/patterns/сreational_patterns.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/create_memo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create_memo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index_body.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index_body.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/script.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/script.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.run">
+  <component name="RunManager" selected="Python.create_db">
     <configuration name="create_db" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />

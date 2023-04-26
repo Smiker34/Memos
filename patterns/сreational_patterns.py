@@ -6,7 +6,7 @@ from sqlite3 import connect
 class Memo:
     auto_id = 0
 
-    def __init__(self, title, text, color, create_date):
+    def __init__(self, title, color, create_date, text=None, list=None):
         self.id = Memo.auto_id
         Memo.auto_id += 1
         self.title = title
@@ -14,6 +14,7 @@ class Memo:
         self.color = f'style="background-color: {color};"'
         self.text_color = f'style="color: {color}; filter: invert(100%);"'
         self.create_date = create_date
+        self.list = list
 
 
 class MemoMapper:
@@ -28,14 +29,17 @@ class MemoMapper:
         self.cursor.execute(statement)
         result = []
         for item in self.cursor.fetchall():
-            id, title, text, color, create_date = item
-            memo = Memo(title, text, re.search(r'#\w{6}', color)[0], create_date)
+            id, title, text, color, list, create_date = item
+            if list == 'None':
+                memo = Memo(title, re.search(r'#\w{6}', color)[0], create_date, text)
+            else:
+                memo = Memo(title, re.search(r'#\w{6}', color)[0], create_date, text, list[1:-1].replace("'", '').split(','))
             memo.id = id
             result.append(memo)
         return result
 
     def find_by_id(self, id):
-        statement = f"SELECT id, title, text, color, create_date FROM {self.tablename} WHERE id={id}"
+        statement = f"SELECT id, title, text, color, list, create_date FROM {self.tablename} WHERE id={id}"
         self.cursor.execute(statement)
         result = self.cursor.fetchone()
         if result:
@@ -44,16 +48,16 @@ class MemoMapper:
             raise RecordNotFoundException(f'record with id={id} not found')
 
     def insert(self, obj):
-        statement = f"INSERT INTO {self.tablename} (title, text, color, create_date) VALUES (?, ?, ?, ?)"
-        self.cursor.execute(statement, (obj.title, obj.text, obj.color, obj.create_date))
+        statement = f"INSERT INTO {self.tablename} (title, text, color, list, create_date) VALUES (?, ?, ?, ?, ?)"
+        self.cursor.execute(statement, (obj.title, obj.text, obj.color, f'{obj.list}', obj.create_date))
         try:
             self.connection.commit()
         except Exception as e:
             raise DbCommitException(e.args)
 
     def update(self, obj):
-        statement = f"UPDATE {self.tablename} SET title=?, text=?, color=? WHERE id=?"
-        self.cursor.execute(statement, (obj.title, obj.text, obj.color, obj.id))
+        statement = f"UPDATE {self.tablename} SET title=?, text=?, color=? list=? WHERE id=?"
+        self.cursor.execute(statement, (obj.title, obj.text, obj.color, f'{obj.list}', obj.id))
         try:
             self.connection.commit()
         except Exception as e:
@@ -77,8 +81,8 @@ class Engine:
         self.memos = mapper.all()
 
     @staticmethod
-    def create_memo(title, text, color, create_date):
-        new_memo = Memo(title, text, color, create_date)
+    def create_memo(title, color, create_date, text=None, list=None):
+        new_memo = Memo(title, color, create_date, text, list)
         mapper.insert(new_memo)
         return new_memo
 
@@ -95,7 +99,7 @@ class Engine:
                 return item
         raise Exception(f'Нет категории с id = {id}')
 
-    def update_memo(self, id, title=None, text=None, color=None):
+    def update_memo(self, id, title=None, text=None, color=None, list=None):
         for item in self.memos:
             print('item', item.id)
             if item.id == id:
@@ -106,6 +110,8 @@ class Engine:
                 if color:
                     item.color = f'style="background-color: {color};"'
                     item.text_color = f'style="color: {color}; filter: invert(100%);"'
+                if list:
+                    item.list = list
             mapper.update(item)
 
     def delete_memo(self, id):
