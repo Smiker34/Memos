@@ -1,18 +1,34 @@
 <script>
-    var num = 1
+    var li_num = 1
     function new_li() {
-        if (num == 11) {
+        if (li_num == 11) {
             alert("Слишком много пунктов")
         } else {
             var ul = document.querySelector("ul");
             var li = document.createElement("li");
             var input = document.createElement("input");
-            input.setAttribute("name", "point" + num);
-            input.setAttribute("placeholder", "Новый пункт")
-            input.setAttribute("maxlength", "37")
+            input.setAttribute("name", "point" + li_num);
+            input.setAttribute("placeholder", "Новый пункт");
+            input.setAttribute("maxlength", "37");
             li.appendChild(input);
             ul.appendChild(li);
-            num++
+            li_num++;
+        }
+    }
+
+    function zero_li() {
+        li_num = 0
+    }
+
+    var point_num = 0
+    function memo_name() {
+        for (var j = 0; j < 4; j++) {
+            var input_list = document.getElementsByName("point")
+            for (var i = 0; i < input_list.length; i++) {
+                var input = input_list[i]
+                input.setAttribute("name", "point" + point_num)
+                point_num++
+            }
         }
     }
 </script>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Course category create
+List memo creation
 {% endblock %}
 {% block style %}
 {% include "style.html" %}
@@ -21,7 +21,7 @@ Course category create
                 <p>
                 <ul>
                     <li>
-                        <input maxlength="37" placeholder="Новый пункт" name="li0">
+                        <input maxlength="37" placeholder="Новый пункт" name="point0">
                     </li>
                 </ul>
                 <button type="button" onclick="new_li()">Добавить</button>
@@ -31,7 +31,7 @@ Course category create
                     <input class="color_input" type="color" name="color" value="#ffffff">
                 </p>
                 <p style="color: red; text-shadow: black 1px 0 10px;">{{error}}</p>
-                <button type="submit">Сохранить и вернуться на главную</button>
+                <button type="submit" onclick="zero_li()">Сохранить и вернуться на главную</button>
             </form>
         </div>
     </div>

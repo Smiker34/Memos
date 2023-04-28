@@ -77,16 +77,26 @@ class MemoPage:
                     return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
             except:
                 pass
+            try:
+                if data['text']:
+                    title, text, color = data['title'], data['text'], data['color']
+                    title = site.decode_value(title)
+                    text = site.decode_value(text)
+                    color = site.decode_value(color)
 
-            title, text, color = data['title'], data['text'], data['color']
-            title = site.decode_value(title)
-            text = site.decode_value(text)
-            color = site.decode_value(color)
+                    if self.memo_id != -1:
+                        site.update_memo(self.memo_id, title, color, text)
 
-            if self.memo_id != -1:
-                site.update_memo(self.memo_id, title, text, color)
+                    return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+            except:
+                title, color = data.pop('title'), data.pop('color')
+                title = site.decode_value(title)
+                color = site.decode_value(color)
 
-            return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+                if self.memo_id != -1:
+                    site.update_memo(self.memo_id, title, color, list=list(data.values()))
+
+                return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
 
         else:
             try:
@@ -97,6 +107,7 @@ class MemoPage:
                                         id=memo.id,
                                         name=memo.title,
                                         text=memo.text,
+                                        list=memo.list,
                                         memo_date=memo.create_date,
                                         color=re.search(r'#\w{6}', memo.color)[0],
                                         date=request.get('date', None))

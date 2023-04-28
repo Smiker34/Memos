@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block title %}
-Course category create
+Memo edit page
 {% endblock %}
 {% block style %}
 {% include "style.html" %}
+{% endblock %}
+{% block script %}
+{% include "script.html" %}
 {% endblock %}
 {% block header %}
 {% include "header.html" %}
@@ -16,7 +19,18 @@ Course category create
             <form method="post">
                 <button class="delete" name="delete" value="delete">X</button>
                 <input class="title_input" maxlength="32" type="text" name="title" value="{{name}}">
+                {% if text %}
                 <textarea class="text_input" maxlength="275" type="text" name="text">{{text}}</textarea>
+                {% endif %}
+                {% if list %}
+                <ul>
+                    {% for point in list %}
+                    <li>
+                        <input placeholder="Пустой пункт" name="point" maxlength="37" value="{{point}}">
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <p>
                     <label>Выберите цвет:</label>
                     <input class="color_input" type="color" name="color" value="{{color}}">

@@ -56,7 +56,7 @@ class MemoMapper:
             raise DbCommitException(e.args)
 
     def update(self, obj):
-        statement = f"UPDATE {self.tablename} SET title=?, text=?, color=? list=? WHERE id=?"
+        statement = f"UPDATE {self.tablename} SET title=?, text=?, color=?, list=? WHERE id=?"
         self.cursor.execute(statement, (obj.title, obj.text, obj.color, f'{obj.list}', obj.id))
         try:
             self.connection.commit()
@@ -99,7 +99,7 @@ class Engine:
                 return item
         raise Exception(f'Нет категории с id = {id}')
 
-    def update_memo(self, id, title=None, text=None, color=None, list=None):
+    def update_memo(self, id, title=None, color=None, text=None, list=None):
         for item in self.memos:
             print('item', item.id)
             if item.id == id:
