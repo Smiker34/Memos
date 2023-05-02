@@ -13,7 +13,38 @@ routes = {}
 class Memos:
     @Debug(name='Index')
     def __call__(self, request):
-        return '200 OK', render('index.html', img='home.svg', date=request.get('date', None), objects_list=site.memos)
+        if request['method'] == 'POST':
+            data = request['data']
+            search = data['search']
+            search = site.decode_value(search)
+
+            if not search:
+                return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+
+            search_result = []
+            for memo in site.memos:
+                if re.match(search, f'{memo.title}'):
+                    search_result.append(memo)
+                    continue
+
+                elif memo.text != None:
+                    if re.match(search, f'{memo.text}'):
+                        search_result.append(memo)
+                        continue
+
+                elif memo.list != None:
+                        for point in memo.list:
+                            if re.match(search, point):
+                                search_result.append(memo)
+                                break
+                            else:
+                                continue
+                else:
+                    continue
+
+            return '200 OK', render('index.html', date=request.get('date', None), objects_list=search_result)
+        else:
+            return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
 
 class NotFound404:
     @Debug(name='NotFound404')
