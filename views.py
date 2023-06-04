@@ -59,16 +59,47 @@ class CreateMemo:
 
         if request['method'] == 'POST':
             data = request['data']
-            title, text, color = data['title'], data['text'], data['color']
-            title = site.decode_value(title)
-            color = site.decode_value(color)
+            try:
+                if data['search']:
+                    search = data['search']
+                    search = site.decode_value(search)
 
-            if not title:
-                return '200 OK', render('create_memo.html', error='Введите название!', date=request.get('date', None))
+                    if not search:
+                        return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
 
-            new_memo = site.create_memo(title, color, create_date=request.get('date', None), text=site.decode_value(text))
-            site.memos.append(new_memo)
-            return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+                    search_result = []
+                    for memo in site.memos:
+                        if re.match(search, f'{memo.title}'):
+                            search_result.append(memo)
+                            continue
+
+                        elif memo.text != None:
+                            if re.match(search, f'{memo.text}'):
+                                search_result.append(memo)
+                                continue
+
+                        elif memo.list != None:
+                            for point in memo.list:
+                                if re.match(search, point):
+                                    search_result.append(memo)
+                                    break
+                                else:
+                                    continue
+                        else:
+                            continue
+
+                    return '200 OK', render('index.html', date=request.get('date', None), objects_list=search_result)
+            except:
+                title, text, color = data['title'], data['text'], data['color']
+                title = site.decode_value(title)
+                color = site.decode_value(color)
+
+                if not title:
+                    return '200 OK', render('create_memo.html', error='Введите название!', date=request.get('date', None))
+
+                new_memo = site.create_memo(title, color, create_date=request.get('date', None), text=site.decode_value(text))
+                site.memos.append(new_memo)
+                return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
         else:
             return '200 OK', render('create_memo.html', date=request.get('date', None))
 
@@ -80,16 +111,47 @@ class CreateListMemo:
 
         if request['method'] == 'POST':
             data = request['data']
-            title, color = data.pop('title'), data.pop('color')
-            title = site.decode_value(title)
-            color = site.decode_value(color)
+            try:
+                if data['search']:
+                    search = data['search']
+                    search = site.decode_value(search)
 
-            if not title:
-                return '200 OK', render('create_list_memo.html', error='Введите название!', date=request.get('date', None))
+                    if not search:
+                        return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
 
-            new_memo = site.create_memo(title, color, create_date=request.get('date', None), list=list(data.values()))
-            site.memos.append(new_memo)
-            return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+                    search_result = []
+                    for memo in site.memos:
+                        if re.match(search, f'{memo.title}'):
+                            search_result.append(memo)
+                            continue
+
+                        elif memo.text != None:
+                            if re.match(search, f'{memo.text}'):
+                                search_result.append(memo)
+                                continue
+
+                        elif memo.list != None:
+                            for point in memo.list:
+                                if re.match(search, point):
+                                    search_result.append(memo)
+                                    break
+                                else:
+                                    continue
+                        else:
+                            continue
+
+                    return '200 OK', render('index.html', date=request.get('date', None), objects_list=search_result)
+            except:
+                title, color = data.pop('title'), data.pop('color')
+                title = site.decode_value(title)
+                color = site.decode_value(color)
+
+                if not title:
+                    return '200 OK', render('create_list_memo.html', error='Введите название!', date=request.get('date', None))
+
+                new_memo = site.create_memo(title, color, create_date=request.get('date', None), list=list(data.values()))
+                site.memos.append(new_memo)
+                return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
         else:
             return '200 OK', render('create_list_memo.html', date=request.get('date', None))
 
@@ -103,31 +165,62 @@ class MemoPage:
         if request['method'] == 'POST':
             data = request['data']
             try:
-                if data['delete']:
-                    site.delete_memo(self.memo_id)
-                    return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+                if data['search']:
+                    search = data['search']
+                    search = site.decode_value(search)
+
+                    if not search:
+                        return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+
+                    search_result = []
+                    for memo in site.memos:
+                        if re.match(search, f'{memo.title}'):
+                            search_result.append(memo)
+                            continue
+
+                        elif memo.text != None:
+                            if re.match(search, f'{memo.text}'):
+                                search_result.append(memo)
+                                continue
+
+                        elif memo.list != None:
+                            for point in memo.list:
+                                if re.match(search, point):
+                                    search_result.append(memo)
+                                    break
+                                else:
+                                    continue
+                        else:
+                            continue
+
+                    return '200 OK', render('index.html', date=request.get('date', None), objects_list=search_result)
             except:
-                pass
-            try:
-                if data['text']:
-                    title, text, color = data['title'], data['text'], data['color']
+                try:
+                    if data['delete']:
+                        site.delete_memo(self.memo_id)
+                        return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+                except:
+                    pass
+                try:
+                    if data['text']:
+                        title, text, color = data['title'], data['text'], data['color']
+                        title = site.decode_value(title)
+                        text = site.decode_value(text)
+                        color = site.decode_value(color)
+
+                        if self.memo_id != -1:
+                            site.update_memo(self.memo_id, title, color, text)
+
+                        return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
+                except:
+                    title, color = data.pop('title'), data.pop('color')
                     title = site.decode_value(title)
-                    text = site.decode_value(text)
                     color = site.decode_value(color)
 
                     if self.memo_id != -1:
-                        site.update_memo(self.memo_id, title, color, text)
+                        site.update_memo(self.memo_id, title, color, list=list(data.values()))
 
                     return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
-            except:
-                title, color = data.pop('title'), data.pop('color')
-                title = site.decode_value(title)
-                color = site.decode_value(color)
-
-                if self.memo_id != -1:
-                    site.update_memo(self.memo_id, title, color, list=list(data.values()))
-
-                return '200 OK', render('index.html', date=request.get('date', None), objects_list=site.memos)
 
         else:
             try:
