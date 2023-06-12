@@ -164,25 +164,15 @@
     }
 
     .content {
-        min-height: 82%vh;
-    }
-
-    .footer {
-        text-align: center;
-        height: 10%;
-        background-color: #42260B;
-    }
-
-    .footer h5 {
-        color: #dbac7d;
-        text-shadow: #654321 1px 0 10px;
+        min-height: 92vh;
     }
 
     .board {
         margin-top: 1px;
         position: relative;
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
         background: radial-gradient(#dbac7d, #B29170);
         background-size: cover;
     }
@@ -255,5 +245,39 @@
         position: absolute;
         top: 3%;
         right: 3%;
+    }
+
+    @media (max-width: 1140px) {
+        .home {
+            left: 17vw;
+        }
+
+        .memo_create {
+            top: 1.5vh;
+            right: 29%;
+        }
+
+        .list_memo_create {
+            top: 1.5vh;
+            right: 25%;
+        }
+
+        .create_container form {
+            left: 30%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .home {
+            left: 17vw;
+        }
+
+        .memo_create {
+            right: 30%;
+        }
+
+        .list_memo_create {
+            right: 25%;
+        }
     }
 </style>
